@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <h2>Mind Game</h2>
+        <div class="game">
+        </div>
+        <button class="reset" onclick="window.location.reload()">Reset Game</button>
+    </div>
+<script>
+
+    const emoji=["🐶","🐶","🦁","🦁","🦉","🦉","🦊","🦊","🐋","🐋","🐅","🐅","🦬","🦬","🐧","🐧","🦓","🦓","🦚","🦚"];
+    var shuf_emoji=emoji.sort(() => (Math.random() > .5) ? 2 : -1);
+    for(var i=0;i<emoji.length;i++){
+        let box=document.createElement('div')
+        box.className='item';
+        box.innerHTML=shuf_emoji[i]
+
+        box.onclick=function(){
+            this.classList.add('open')
+
+            setTimeout(function(){
+                if(document.querySelectorAll('.open').length >1){
+                    if(document.querySelectorAll('.open')[0].innerHTML==
+                document.querySelectorAll('.open')[1].innerHTML){
+                    document.querySelectorAll('.open')[0].classList.add('match')
+                    document.querySelectorAll('.open')[1].classList.add('match')
+
+                   
+                    document.querySelectorAll('.open')[0].classList.remove('open')
+                    document.querySelectorAll('.open')[1].classList.remove('open')
+
+                    if(document.querySelectorAll('.match').length==emoji.length){
+                        alert('you are win')
+                    }
+                }
+                    else{
+                        document.querySelectorAll('.open')[1].classList.remove('open')
+                        document.querySelectorAll('.open')[0].classList.remove('open')
+                    }
+                }
+                },500)
+            
+        }
+
+        document.querySelector('.game').appendChild(box);
+}
+</script>
+</body>
+</html>
